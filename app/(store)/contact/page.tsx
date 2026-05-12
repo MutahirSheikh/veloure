@@ -12,38 +12,38 @@ export const metadata: Metadata = {
 
 export default async function ContactPage() {
   const settings = await getSiteSettings();
+  const content = settings.storefront_content.contact_page;
+  const iconMap = {
+    mail: Mail,
+    phone: Phone,
+    "map-pin": MapPin
+  } as const;
 
   return (
     <>
-      <PageHero title="Contact" crumb="Contact" />
+      <PageHero title={content.hero_title} crumb={content.hero_crumb} />
       <section className="container grid gap-8 py-16 lg:grid-cols-3">
-        <Card>
-          <CardHeader>
-            <CardTitle>Email</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center gap-3 text-muted-foreground">
-            <Mail className="h-5 w-5 text-primary" />
-            {settings.support_email}
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Phone</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center gap-3 text-muted-foreground">
-            <Phone className="h-5 w-5 text-primary" />
-            {settings.contact_phone || "Configured in store settings"}
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Studio</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center gap-3 text-muted-foreground">
-            <MapPin className="h-5 w-5 text-primary" />
-            Manchester showroom and fulfillment desk
-          </CardContent>
-        </Card>
+        {content.cards.map((card) => {
+          const Icon = iconMap[card.icon];
+          const body =
+            card.icon === "mail"
+              ? settings.support_email
+              : card.icon === "phone"
+                ? settings.contact_phone || card.body
+                : card.body;
+
+          return (
+            <Card key={`${card.icon}-${card.title}`}>
+              <CardHeader>
+                <CardTitle>{card.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex items-center gap-3 text-muted-foreground">
+                <Icon className="h-5 w-5 text-primary" />
+                {body}
+              </CardContent>
+            </Card>
+          );
+        })}
       </section>
     </>
   );

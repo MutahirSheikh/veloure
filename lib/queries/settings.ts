@@ -6,6 +6,7 @@ import { CACHE_TAGS } from "@/lib/constants";
 import { getSupabaseAdminClient } from "@/lib/db/admin";
 import { isRecoverableSupabaseReadError, logSupabaseFallback } from "@/lib/db/errors";
 import type { SiteSettings } from "@/lib/db/types";
+import { defaultStorefrontContent, normalizeStorefrontContent } from "@/lib/storefront";
 
 const fallbackSiteSettings: SiteSettings = {
   id: 1,
@@ -24,6 +25,7 @@ const fallbackSiteSettings: SiteSettings = {
   cart_alert_admin_enabled: false,
   homepage_heading: "Elevate Your Everyday Rituals",
   homepage_subheading: "Fashion-forward lifestyle pieces with quiet texture, warm neutrals, and polished silhouettes.",
+  storefront_content: defaultStorefrontContent,
   created_at: new Date(0).toISOString(),
   updated_at: new Date(0).toISOString()
 };
@@ -40,7 +42,10 @@ export async function getSiteSettings() {
         }
         throw error;
       }
-      return data as SiteSettings;
+      return {
+        ...(data as SiteSettings),
+        storefront_content: normalizeStorefrontContent((data as Partial<SiteSettings>).storefront_content)
+      } as SiteSettings;
     },
     ["site-settings"],
     { tags: [CACHE_TAGS.settings], revalidate: 300 }

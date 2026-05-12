@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { storefrontContentSchema } from "@/lib/storefront";
 import { optionalMoneySchema, optionalStringSchema } from "@/lib/validators/shared";
 
 export const settingsSchema = z.object({
@@ -17,7 +18,8 @@ export const settingsSchema = z.object({
   cart_alert_customer_enabled: z.coerce.boolean(),
   cart_alert_admin_enabled: z.coerce.boolean(),
   homepage_heading: z.string().trim().min(3, "Homepage heading is required."),
-  homepage_subheading: z.string().trim().min(8, "Homepage subheading is required.")
+  homepage_subheading: z.string().trim().min(8, "Homepage subheading is required."),
+  storefront_content: storefrontContentSchema
 });
 
 export type SettingsInput = z.infer<typeof settingsSchema>;

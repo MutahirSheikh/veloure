@@ -1,3 +1,5 @@
+import type { StorefrontContent } from "@/lib/storefront";
+
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type AppRole = "customer" | "admin";
@@ -241,6 +243,7 @@ export type SiteSettings = {
   cart_alert_admin_enabled: boolean;
   homepage_heading: string;
   homepage_subheading: string;
+  storefront_content: StorefrontContent;
   created_at: string;
   updated_at: string;
 };
