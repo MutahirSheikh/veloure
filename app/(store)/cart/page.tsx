@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function CartPage() {
   return (
     <>
-      <PageHero title="Cart" crumb="Cart" />
+      <PageHero title="Shop Cart" crumb="Shop Cart" />
       <CartPageClient />
     </>
   );

@@ -44,14 +44,11 @@ export const FULFILLMENT_STATUSES = [
   "returned"
 ] as const;
 
-export const FALLBACK_PRODUCT_IMAGE =
-  "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80";
+export const FALLBACK_PRODUCT_IMAGE = "/images/1.png";
 
-export const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=1800&q=85";
+export const HERO_IMAGE = "/images/4.png";
 
-export const PAGE_BANNER_IMAGE =
-  "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=85";
+export const PAGE_BANNER_IMAGE = "/images/lady-2.png";
 
 export const MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024;
 export const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];

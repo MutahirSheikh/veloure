@@ -8,10 +8,10 @@ export default async function StoreLayout({ children }: { children: React.ReactN
   const settings = await getSiteSettings();
 
   return (
-    <>
+    <div className="store-shell min-h-screen">
       <StoreHeader settings={settings} />
       <main>{children}</main>
       <StoreFooter settings={settings} />
-    </>
+    </div>
   );
 }

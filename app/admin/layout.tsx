@@ -21,8 +21,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   await redirectIfNotAdmin();
 
   return (
-    <div className="min-h-screen bg-muted/45 lg:grid lg:grid-cols-[260px_1fr]">
-      <aside className="border-r border-border bg-background">
+    <div className="min-h-screen bg-white lg:grid lg:grid-cols-[260px_1fr]">
+      <aside className="border-r border-border bg-white">
         <div className="flex h-20 items-center justify-between border-b border-border px-5">
           <Logo href="/admin" />
           <UserButton afterSignOutUrl="/" />

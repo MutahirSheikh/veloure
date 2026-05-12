@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { CatalogToolbar } from "@/components/products/catalog-toolbar";
 import { Pagination } from "@/components/common/pagination";
 import { PageHero } from "@/components/layout/page-hero";
 import { ProductFilters } from "@/components/products/product-filters";
@@ -38,7 +39,8 @@ export default async function ShopPage({ searchParams }: Props) {
     stock: value(params, "stock"),
     featured: value(params, "featured"),
     new: value(params, "new"),
-    sort: value(params, "sort")
+    sort: value(params, "sort"),
+    view: value(params, "view") ?? "grid"
   };
   const [settings, options, result] = await Promise.all([
     getSiteSettings(),
@@ -60,11 +62,22 @@ export default async function ShopPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHero title="Shop" crumb="Shop" />
-      <div className="container py-12">
-        <ProductFilters action="/shop" categories={options.categories} colors={options.colors} sizes={options.sizes} current={current} />
-        <div className="mt-10">
-          <ProductGrid products={result.products} settings={settings} />
+      <PageHero title="Shop Standard" crumb="Shop Standard" />
+      <div className="container py-8 md:py-12">
+        <div className="grid gap-5 xl:grid-cols-[260px_1fr] 2xl:grid-cols-[280px_1fr]">
+          <aside>
+            <ProductFilters action="/shop" categories={options.categories} colors={options.colors} sizes={options.sizes} current={current} />
+          </aside>
+
+          <div>
+            <CatalogToolbar page={result.page} pageSize={result.pageSize} total={result.total} current={current} />
+            <div className="mt-6">
+              <ProductGrid products={result.products} settings={settings} view={current.view === "list" ? "list" : "grid"} />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4">
           <Pagination page={result.page} totalPages={result.totalPages} basePath="/shop" searchParams={params} />
         </div>
       </div>

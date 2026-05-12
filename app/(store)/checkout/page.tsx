@@ -22,10 +22,10 @@ export default async function CheckoutPage() {
       <PageHero title="Checkout" crumb="Checkout" />
       <div className="container py-12">
         {cart.lines.length === 0 ? (
-          <div className="rounded-md border border-border p-10 text-center">
-            <h1 className="font-serif text-3xl font-semibold">Your cart is empty.</h1>
-            <p className="mt-3 text-muted-foreground">Add a product before placing a COD order.</p>
-            <Button className="mt-6" asChild>
+          <div className="mx-auto max-w-xl rounded-[28px] border border-black/8 bg-white p-12 text-center shadow-[0_18px_40px_rgba(31,24,18,0.05)]">
+            <h1 className="text-4xl font-black tracking-tight text-[#141414]">Your cart is empty.</h1>
+            <p className="mt-4 leading-7 text-black/55">Add a product before placing a COD order.</p>
+            <Button className="mt-8 h-12 rounded-full bg-black px-8 text-white hover:bg-black/90" asChild>
               <Link href="/shop">Continue shopping</Link>
             </Button>
           </div>
