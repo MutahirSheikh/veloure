@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import "@/app/globals.css";
@@ -24,7 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="en">
         <body>
           <ToastProvider>
-            <RouteToastListener />
+            <Suspense fallback={null}>
+              <RouteToastListener />
+            </Suspense>
             <CartProvider>
               {children}
               <CartDrawer />
