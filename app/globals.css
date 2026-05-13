@@ -4,12 +4,12 @@
 
 :root {
   --font-sans: "Inter", Arial, sans-serif;
-  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Inter", Arial, sans-serif;
   --background: 0 0% 100%;
   --foreground: 30 16% 12%;
   --card: 0 0% 100%;
   --card-foreground: 30 16% 12%;
-  --primary: 32 34% 52%;
+  --primary: 16 100% 59%;
   --primary-foreground: 36 41% 97%;
   --secondary: 0 0% 98%;
   --secondary-foreground: 30 16% 16%;
@@ -21,7 +21,7 @@
   --destructive-foreground: 0 0% 100%;
   --border: 220 14% 90%;
   --input: 220 14% 90%;
-  --ring: 32 34% 52%;
+  --ring: 16 100% 59%;
   --radius: 0.5rem;
 }
 
@@ -36,6 +36,7 @@ html {
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -70,17 +71,116 @@ body {
 
 .admin-table th,
 .admin-table td {
-  border-bottom: 1px solid hsl(var(--border));
-  padding: 0.9rem;
+  border-bottom: 1px solid #e9edf2;
+  padding: 1rem 1.5rem;
   text-align: left;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .admin-table th {
-  color: hsl(var(--muted-foreground));
-  font-size: 0.75rem;
+  background: #f7f8fa;
+  color: #52617b;
+  font-size: 0.82rem;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: none;
+}
+
+.admin-shell {
+  --admin-orange: #ff6c2f;
+  --admin-text: #142044;
+  font-size: 15px;
+}
+
+.admin-sidebar::-webkit-scrollbar {
+  width: 0;
+}
+
+.admin-card {
+  max-width: 100%;
+  border: 1px solid #f0eeee;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(35, 43, 52, 0.04);
+}
+
+.admin-muted-panel {
+  background: #f1f7fc;
+}
+
+.admin-input {
+  height: 40px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #d9e0ea;
+  background: #fff;
+  padding: 0 14px;
+  color: #3e4d68;
+  font-size: 14px;
+  outline: none;
+}
+
+.admin-input::placeholder {
+  color: #70809b;
+}
+
+.admin-action {
+  display: inline-grid;
+  height: 36px;
+  width: 48px;
+  place-items: center;
+  border-radius: 8px;
+  border: 0;
+}
+
+.admin-action-view {
+  background: #eef2f7;
+  color: #324155;
+}
+
+.admin-action-edit {
+  background: #fff0eb;
+  color: #ff6c2f;
+}
+
+.admin-action-delete {
+  background: #ffecee;
+  color: #ef4b57;
+}
+
+.admin-status-green {
+  border-radius: 4px;
+  background: #c9f3db;
+  color: #16b85f;
+  padding: 0.35rem 0.8rem;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-status-orange {
+  border-radius: 4px;
+  background: #ffe1d5;
+  color: #ff6c2f;
+  padding: 0.35rem 0.8rem;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-status-red {
+  border-radius: 4px;
+  background: #ffdbe0;
+  color: #ef4b57;
+  padding: 0.35rem 0.8rem;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-status-gray {
+  border-radius: 4px;
+  background: #edf1f6;
+  color: #142044;
+  padding: 0.35rem 0.8rem;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .store-shell {

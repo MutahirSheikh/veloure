@@ -47,22 +47,24 @@ export function CategoryForm({ categories, category }: { categories: Category[];
   }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-md border border-border bg-card p-6">
-      <h2 className="font-serif text-2xl font-semibold">{category ? "Edit category" : "Create category"}</h2>
-      <div className="mt-5 grid gap-4 sm:grid-cols-2">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="admin-card overflow-hidden">
+      <div className="border-b border-[#e9edf2] px-6 py-5">
+        <h2 className="text-lg font-bold text-[#142044]">{category ? "Edit Category" : "Create Category"}</h2>
+      </div>
+      <div className="grid gap-4 p-6 sm:grid-cols-2">
         <Field label="Name" error={form.formState.errors.name?.message}>
-          <Input {...form.register("name")} />
+          <Input className="admin-input" {...form.register("name")} />
         </Field>
         <Field label="Slug" error={form.formState.errors.slug?.message}>
           <div className="flex gap-2">
-            <Input {...form.register("slug")} />
+            <Input className="admin-input" {...form.register("slug")} />
             <Button type="button" variant="outline" onClick={() => form.setValue("slug", ensureSlug(form.getValues("name")), { shouldValidate: true })}>
               <Wand2 className="h-4 w-4" />
             </Button>
           </div>
         </Field>
         <Field label="Parent category">
-          <select {...form.register("parent_id")} className="h-11 w-full rounded-md border border-input bg-background px-3 text-sm">
+          <select {...form.register("parent_id")} className="admin-input">
             <option value="">No parent</option>
             {categories
               .filter((item) => item.id !== category?.id)
@@ -74,28 +76,30 @@ export function CategoryForm({ categories, category }: { categories: Category[];
           </select>
         </Field>
         <Field label="Sort order">
-          <Input type="number" min="0" {...form.register("sort_order")} />
+          <Input className="admin-input" type="number" min="0" {...form.register("sort_order")} />
         </Field>
         <Field label="Image URL">
-          <Input {...form.register("image_url")} />
+          <Input className="admin-input" {...form.register("image_url")} />
         </Field>
         <label className="mt-8 flex items-center gap-2 text-sm">
           <input type="checkbox" {...form.register("is_active")} />
           Active
         </label>
         <Field label="Description" className="sm:col-span-2">
-          <Textarea {...form.register("description")} />
+          <Textarea className="rounded-md border-[#d9e0ea]" {...form.register("description")} />
         </Field>
         <Field label="SEO title">
-          <Input {...form.register("seo_title")} />
+          <Input className="admin-input" {...form.register("seo_title")} />
         </Field>
         <Field label="SEO description">
-          <Input {...form.register("seo_description")} />
+          <Input className="admin-input" {...form.register("seo_description")} />
         </Field>
       </div>
-      <Button className="mt-6" disabled={isPending}>
+      <div className="border-t border-[#e9edf2] p-6">
+      <Button className="bg-[#ff6c2f] hover:bg-[#ec5c20]" disabled={isPending}>
         {isPending ? "Saving..." : "Save category"}
       </Button>
+      </div>
     </form>
   );
 }

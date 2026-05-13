@@ -37,21 +37,23 @@ export function OrderStatusControls({ order }: { order: OrderWithItems }) {
   }
 
   return (
-    <div className="rounded-md border border-border bg-card p-6">
-      <h2 className="font-serif text-2xl font-semibold">Admin actions</h2>
-      <div className="mt-5 grid gap-4">
+    <div className="admin-card overflow-hidden">
+      <div className="border-b border-[#e9edf2] px-6 py-5">
+        <h2 className="text-lg font-bold text-[#142044]">Admin Actions</h2>
+      </div>
+      <div className="grid gap-4 p-6">
         <Select label="Order status" value={orderStatus} onChange={setOrderStatus} values={ORDER_STATUSES} />
         <Select label="Payment status" value={paymentStatus} onChange={setPaymentStatus} values={PAYMENT_STATUSES} />
         <Select label="Fulfillment status" value={fulfillmentStatus} onChange={setFulfillmentStatus} values={FULFILLMENT_STATUSES} />
         <label className="grid gap-2 text-sm">
           Internal admin note
-          <Textarea value={adminNote} onChange={(event) => setAdminNote(event.target.value)} />
+          <Textarea className="rounded-md border-[#d9e0ea]" value={adminNote} onChange={(event) => setAdminNote(event.target.value)} />
         </label>
         <label className="grid gap-2 text-sm">
           Timeline note
-          <Textarea value={historyNote} onChange={(event) => setHistoryNote(event.target.value)} />
+          <Textarea className="rounded-md border-[#d9e0ea]" value={historyNote} onChange={(event) => setHistoryNote(event.target.value)} />
         </label>
-        <Button onClick={submit} disabled={isPending}>
+        <Button className="bg-[#ff6c2f] hover:bg-[#ec5c20]" onClick={submit} disabled={isPending}>
           {isPending ? "Updating..." : "Update order"}
         </Button>
       </div>
@@ -73,7 +75,7 @@ function Select<T extends string>({
   return (
     <label className="grid gap-2 text-sm">
       {label}
-      <select value={value} onChange={(event) => onChange(event.target.value as T)} className="h-11 rounded-md border border-input bg-background px-3">
+      <select value={value} onChange={(event) => onChange(event.target.value as T)} className="admin-input">
         {values.map((item) => (
           <option key={item} value={item}>
             {item.replaceAll("_", " ")}
