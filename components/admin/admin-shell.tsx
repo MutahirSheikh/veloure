@@ -34,6 +34,7 @@ import {
 import { cn } from "@/lib/utils";
 
 type NavItem = {
+  id: string;
   href: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
@@ -45,8 +46,9 @@ const groups: Array<{ title: string; items: NavItem[] }> = [
   {
     title: "General",
     items: [
-      { href: "/admin", label: "Dashboard", icon: Grid2X2 },
+      { id: "dashboard", href: "/admin", label: "Dashboard", icon: Grid2X2 },
       {
+        id: "products",
         href: "/admin/products",
         label: "Products",
         icon: Package,
@@ -59,6 +61,7 @@ const groups: Array<{ title: string; items: NavItem[] }> = [
         ]
       },
       {
+        id: "category",
         href: "/admin/categories",
         label: "Category",
         icon: ClipboardCheck,
@@ -68,8 +71,9 @@ const groups: Array<{ title: string; items: NavItem[] }> = [
           { href: "/admin/categories", label: "Create" }
         ]
       },
-      { href: "/admin/inventory", label: "Inventory", icon: Boxes },
+      { id: "inventory", href: "/admin/inventory", label: "Inventory", icon: Boxes },
       {
+        id: "orders",
         href: "/admin/orders",
         label: "Orders",
         icon: ShoppingBag,
@@ -80,8 +84,9 @@ const groups: Array<{ title: string; items: NavItem[] }> = [
           { href: "/admin/orders", label: "Check Out" }
         ]
       },
-      { href: "/admin/inventory", label: "Purchases", icon: WalletCards },
+      { id: "purchases", href: "/admin/inventory", label: "Purchases", icon: WalletCards },
       {
+        id: "attributes",
         href: "/admin/attributes",
         label: "Attributes",
         icon: Tags,
@@ -91,6 +96,7 @@ const groups: Array<{ title: string; items: NavItem[] }> = [
         ]
       },
       {
+        id: "invoices",
         href: "/admin/invoices",
         label: "Invoices",
         icon: FileText,
@@ -100,24 +106,24 @@ const groups: Array<{ title: string; items: NavItem[] }> = [
           { href: "/admin/invoices/new", label: "Create" }
         ]
       },
-      { href: "/admin/settings", label: "Settings", icon: Settings }
+      { id: "settings", href: "/admin/settings", label: "Settings", icon: Settings }
     ]
   },
   {
     title: "Users",
     items: [
-      { href: "/admin/customers", label: "Profile", icon: UserCircle },
-      { href: "/admin/customers", label: "Roles", icon: UsersRound },
-      { href: "/admin/settings", label: "Permissions", icon: ShieldCheck },
-      { href: "/admin/customers", label: "Customers", icon: Users },
-      { href: "/admin/customers", label: "Sellers", icon: PackageOpen }
+      { id: "profile", href: "/admin/customers", label: "Profile", icon: UserCircle },
+      { id: "roles", href: "/admin/customers", label: "Roles", icon: UsersRound },
+      { id: "permissions", href: "/admin/settings", label: "Permissions", icon: ShieldCheck },
+      { id: "customers", href: "/admin/customers", label: "Customers", icon: Users },
+      { id: "sellers", href: "/admin/customers", label: "Sellers", icon: PackageOpen }
     ]
   },
   {
     title: "Other",
     items: [
-      { href: "/admin/settings", label: "Coupons", icon: Gift },
-      { href: "/admin/settings", label: "Reviews", icon: Heart }
+      { id: "coupons", href: "/admin/settings", label: "Coupons", icon: Gift },
+      { id: "reviews", href: "/admin/settings", label: "Reviews", icon: Heart }
     ]
   }
 ];
@@ -167,8 +173,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
               {!collapsed ? <p className="mb-3 px-2 text-[11px] font-bold uppercase text-[#687481]">{group.title}</p> : null}
               <div className="space-y-1">
                 {group.items.map((item) => {
-                  const isActive =
-                    item.href === "/admin" ? pathname === "/admin" : pathname === item.href || pathname.startsWith(`${item.href}/`);
+                  const isActive = isNavItemActive(item, pathname);
                   const Icon = item.icon;
 
                   return (
@@ -267,4 +272,13 @@ function IconButton({ icon: Icon }: { icon: React.ComponentType<{ className?: st
       <Icon className="h-5 w-5 fill-[#8a94aa]/20" />
     </button>
   );
+}
+
+function isNavItemActive(item: NavItem, pathname: string) {
+  if (item.id === "dashboard") return pathname === "/admin";
+  if (item.id === "settings") return pathname === "/admin/settings";
+  if (item.href === "/admin/settings") return false;
+  if (item.href === "/admin/customers") return item.id === "customers" && pathname.startsWith("/admin/customers");
+  if (item.href === "/admin/inventory") return item.id === "inventory" && pathname.startsWith("/admin/inventory");
+  return pathname === item.href || pathname.startsWith(`${item.href}/`);
 }
