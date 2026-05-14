@@ -9,6 +9,7 @@ import { upsertCategoryAction } from "@/actions/admin/categories";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/toast";
 import type { Category } from "@/lib/db/types";
@@ -48,6 +49,7 @@ export function CategoryForm({ categories, category }: { categories: Category[];
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="admin-card overflow-hidden">
+      <LoadingOverlay show={isPending} label="Saving category" />
       <div className="border-b border-[#e9edf2] px-6 py-5">
         <h2 className="text-lg font-bold text-[#142044]">{category ? "Edit Category" : "Create Category"}</h2>
       </div>

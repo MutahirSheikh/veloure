@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { archiveProductAction } from "@/actions/admin/products";
 import { Button } from "@/components/ui/button";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { useToast } from "@/components/ui/toast";
 
 export function ArchiveProductButton({ productId }: { productId: string }) {
@@ -28,8 +29,11 @@ export function ArchiveProductButton({ productId }: { productId: string }) {
   }
 
   return (
-    <Button size="sm" variant="destructive" disabled={isPending} onClick={archive}>
-      {isPending ? "Archiving..." : "Archive"}
-    </Button>
+    <>
+      <LoadingOverlay show={isPending} label="Archiving product" />
+      <Button size="sm" variant="destructive" disabled={isPending} onClick={archive}>
+        {isPending ? "Archiving..." : "Archive"}
+      </Button>
+    </>
   );
 }

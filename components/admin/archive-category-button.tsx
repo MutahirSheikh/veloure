@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { archiveCategoryAction } from "@/actions/admin/categories";
 import { Button } from "@/components/ui/button";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { useToast } from "@/components/ui/toast";
 
 export function ArchiveCategoryButton({ categoryId }: { categoryId: string }) {
@@ -28,8 +29,11 @@ export function ArchiveCategoryButton({ categoryId }: { categoryId: string }) {
   }
 
   return (
-    <Button size="sm" variant="destructive" disabled={isPending} onClick={archive}>
-      {isPending ? "Archiving..." : "Archive"}
-    </Button>
+    <>
+      <LoadingOverlay show={isPending} label="Archiving category" />
+      <Button size="sm" variant="destructive" disabled={isPending} onClick={archive}>
+        {isPending ? "Archiving..." : "Archive"}
+      </Button>
+    </>
   );
 }

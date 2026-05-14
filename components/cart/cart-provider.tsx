@@ -12,6 +12,7 @@ import {
   updateCartItemQuantityAction
 } from "@/actions/cart/actions";
 import type { CartSnapshot } from "@/lib/db/types";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { useToast } from "@/components/ui/toast";
 
 const GUEST_CART_KEY = "veloure.guest-cart.v1";
@@ -93,11 +94,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const loadServerCart = React.useCallback(async () => {
+  const loadServerCart = React.useCallback(async (showOverlay = false) => {
     if (!isSignedIn) return;
-    setIsLoading(true);
+    if (showOverlay) setIsLoading(true);
     const result = await getCartSnapshotAction();
-    setIsLoading(false);
+    if (showOverlay) setIsLoading(false);
     if (result.ok) {
       setLines(mapSnapshot(result.data));
       setServerTotals({ subtotal: result.data.subtotal, shipping: result.data.shipping, total: result.data.total });
@@ -117,7 +118,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     const guestLines = readGuestLines();
     if (guestLines.length > 0) {
-      setIsLoading(true);
       mergeGuestCartAction({
         lines: guestLines.map((line) => ({
           productId: line.productId,
@@ -125,7 +125,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           quantity: line.quantity
         }))
       }).then((result) => {
-        setIsLoading(false);
         window.localStorage.removeItem(GUEST_CART_KEY);
         if (result.ok) {
           setLines(mapSnapshot(result.data));
@@ -268,6 +267,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         clear
       }}
     >
+      <LoadingOverlay show={isLoading} label="Updating cart" />
       {children}
     </CartContext.Provider>
   );

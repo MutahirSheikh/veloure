@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
@@ -23,7 +24,6 @@ import {
   Settings,
   ShieldCheck,
   ShoppingBag,
-  ShoppingBasket,
   Tags,
   UserCircle,
   Users,
@@ -153,9 +153,15 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         )}
       >
         <div className={cn("sticky top-0 z-10 flex h-[86px] items-center justify-between bg-[#232b34]", collapsed ? "px-4" : "px-7")}>
-          <Link href="/admin" className={cn("flex items-center gap-2 text-2xl font-black text-white", collapsed && "justify-center")}>
-            <ShoppingBasket className="h-7 w-7 fill-[#ff6c2f] text-[#ff6c2f]" />
-            {!collapsed ? <span>Veloure</span> : null}
+          <Link href="/admin" className={cn("flex items-center", collapsed && "justify-center")}>
+            <Image
+              src="/logo/logo-2.png"
+              alt="Veloure"
+              width={188}
+              height={62}
+              priority
+              className={cn("logo-height-large w-auto object-contain", collapsed && "logo-height-small")}
+            />
           </Link>
           <button
             type="button"
@@ -234,9 +240,8 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
           >
             <Menu className="h-5 w-5" />
           </button>
-          <Link href="/admin" className="flex items-center gap-2 text-xl font-black text-[#142044] lg:hidden">
-            <ShoppingBasket className="h-6 w-6 fill-[#ff6c2f] text-[#ff6c2f]" />
-            <span>Veloure</span>
+          <Link href="/admin" className="flex items-center lg:hidden">
+            <Image src="/logo/logo-2.png" alt="Veloure" width={170} height={56} priority className="h-10 w-auto object-contain" />
           </Link>
           <div className="hidden lg:block" />
           <div className="ml-auto flex min-w-0 items-center gap-2 sm:gap-3">

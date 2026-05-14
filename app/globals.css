@@ -31,10 +31,12 @@
 
 html {
   scroll-behavior: smooth;
+  background: #f4efe8;
 }
 
 body {
-  background: hsl(var(--background));
+  min-height: 100vh;
+  background: #f4efe8;
   color: hsl(var(--foreground));
   overflow-x: hidden;
 }
@@ -182,6 +184,192 @@ body {
   font-size: 12px;
   font-weight: 700;
 }
+
+.brand-loader-mark {
+  animation: brand-loader-float 1.8s ease-in-out infinite;
+}
+
+.brand-loader-screen {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(179, 138, 94, 0.055), transparent 34rem),
+    radial-gradient(circle at 20% 18%, rgba(36, 29, 25, 0.025), transparent 36rem),
+    radial-gradient(circle at 84% 24%, rgba(216, 187, 115, 0.032), transparent 38rem),
+    rgba(244, 239, 232, 0.72);
+  backdrop-filter: blur(18px);
+}
+
+.brand-loader-screen::before {
+  content: "";
+  position: absolute;
+  inset: 4%;
+  border-radius: 999px;
+  background: rgba(179, 138, 94, 0.025);
+  filter: blur(150px);
+  pointer-events: none;
+}
+
+.brand-loader-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(216, 187, 115, 0.12);
+  background:
+    linear-gradient(145deg, #121113, #221b17),
+    #111114;
+  box-shadow:
+    0 36px 100px rgba(0, 0, 0, 0.52),
+    inset 0 1px 0 rgba(255, 247, 229, 0.08);
+  backdrop-filter: blur(3px);
+}
+
+.brand-loader-panel::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 30%),
+    radial-gradient(circle at top right, rgba(216, 187, 115, 0.08), transparent 32%);
+  pointer-events: none;
+}
+
+.brand-loader-aura {
+  background: radial-gradient(circle, rgba(216, 187, 115, 0.16) 0%, rgba(216, 187, 115, 0) 72%);
+}
+
+.brand-loader-frame {
+  fill: rgba(255, 248, 236, 0.03);
+  stroke: rgba(216, 187, 115, 0.08);
+}
+
+.brand-loader-orbit {
+  stroke: #d8bb73;
+  opacity: 0.54;
+}
+
+.brand-loader-orbit-a {
+  stroke-dasharray: 72 212;
+  transform-origin: center;
+  animation: brand-loader-spin 2.6s linear infinite;
+}
+
+.brand-loader-orbit-b {
+  stroke-dasharray: 42 184;
+  transform-origin: center;
+  animation: brand-loader-spin-reverse 3.6s linear infinite;
+}
+
+.brand-loader-orbit-c {
+  stroke: rgba(216, 187, 115, 0.34);
+  stroke-dasharray: 12 12 40;
+  transform-origin: center;
+  animation: brand-loader-pulse-line 2.2s ease-in-out infinite;
+}
+
+.brand-loader-star {
+  fill: #f6e7bd;
+  opacity: 0.3;
+}
+
+.brand-loader-star-a {
+  animation: brand-loader-pulse 1.3s ease-in-out infinite;
+}
+
+.brand-loader-star-b {
+  animation: brand-loader-pulse 1.6s ease-in-out infinite 0.2s;
+}
+
+.brand-loader-star-c {
+  animation: brand-loader-pulse 1.8s ease-in-out infinite 0.45s;
+}
+
+.brand-loader-plaque {
+  background:
+    radial-gradient(circle at top, rgba(255, 226, 170, 0.08), transparent 36%),
+    linear-gradient(145deg, rgba(30, 26, 25, 0.98), rgba(8, 8, 10, 0.98));
+}
+
+.brand-loader-plaque-shine {
+  background:
+    linear-gradient(115deg, transparent 22%, rgba(255, 239, 197, 0.1) 37%, transparent 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 30%);
+  transform: translateX(-42%);
+  animation: brand-loader-shine 2.8s ease-in-out infinite;
+}
+
+@keyframes brand-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes brand-loader-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes brand-loader-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes brand-loader-pulse {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.14);
+    opacity: 1;
+  }
+}
+
+@keyframes brand-loader-pulse-line {
+  0%,
+  100% {
+    opacity: 0.42;
+  }
+  50% {
+    opacity: 0.92;
+  }
+}
+
+@keyframes brand-loader-shine {
+  0% {
+    transform: translateX(-42%);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.85;
+  }
+  42% {
+    transform: translateX(42%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(42%);
+    opacity: 0;
+  }
+}
+
+.logo-height-large {
+  height: 13rem;
+}
+.logo-height-medium {
+  height: 10rem;
+}
+.logo-height-small {
+  height: 7rem;
+}
+
+
 
 .store-shell {
   background: #ffffff;

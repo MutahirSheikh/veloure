@@ -8,6 +8,7 @@ import { updateSettingsAction, uploadSettingsImageAction } from "@/actions/setti
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/toast";
 import type { SiteSettings } from "@/lib/db/types";
@@ -75,6 +76,7 @@ export function SettingsForm({ settings }: { settings: SiteSettings }) {
 
   return (
     <div className="space-y-5">
+      <LoadingOverlay show={pendingSection !== null} label="Saving settings" />
       <Accordion title="Store Basics" description="Brand identity, support details, currency, shipping, SEO, and alert behavior." defaultOpen>
         <div className="grid gap-5 lg:grid-cols-2">
           <Field label="Store name"><Input className="admin-input" value={general.store_name} onChange={(event) => updateGeneral("store_name", event.target.value)} /></Field>

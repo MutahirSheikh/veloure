@@ -9,6 +9,7 @@ import { deleteAddressAction, setDefaultAddressAction, upsertAddressAction } fro
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { useToast } from "@/components/ui/toast";
 import type { Address } from "@/lib/db/types";
 import { addressSchema, type AddressInput } from "@/lib/validators/profile";
@@ -91,6 +92,7 @@ export function AddressBook({ addresses }: { addresses: Address[] }) {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_1fr]">
+      <LoadingOverlay show={isPending} label="Updating address" />
       <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-md border border-border bg-card p-6">
         <h2 className="font-serif text-2xl font-semibold">{editingId ? "Edit address" : "Add address"}</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">

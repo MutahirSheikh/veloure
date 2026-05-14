@@ -4,6 +4,7 @@ import * as React from "react";
 
 import { updateOrderAction } from "@/actions/admin/orders";
 import { Button } from "@/components/ui/button";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/toast";
 import { FULFILLMENT_STATUSES, ORDER_STATUSES, PAYMENT_STATUSES } from "@/lib/constants";
@@ -38,6 +39,7 @@ export function OrderStatusControls({ order }: { order: OrderWithItems }) {
 
   return (
     <div className="admin-card overflow-hidden">
+      <LoadingOverlay show={isPending} label="Updating order" />
       <div className="border-b border-[#e9edf2] px-6 py-5">
         <h2 className="text-lg font-bold text-[#142044]">Admin Actions</h2>
       </div>

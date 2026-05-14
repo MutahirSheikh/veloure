@@ -8,6 +8,7 @@ import { updateProfileAction } from "@/actions/profile/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { useToast } from "@/components/ui/toast";
 import type { Profile } from "@/lib/db/types";
 import { profileUpdateSchema, type ProfileUpdateInput } from "@/lib/validators/profile";
@@ -36,6 +37,7 @@ export function ProfileForm({ profile }: { profile: Profile }) {
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-md border border-border bg-card p-6">
+      <LoadingOverlay show={isPending} label="Saving profile" />
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <Label>Full name</Label>

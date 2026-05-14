@@ -6,16 +6,18 @@ import { Minus, Plus } from "lucide-react";
 import { adjustInventoryAction } from "@/actions/admin/inventory";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { useToast } from "@/components/ui/toast";
 import type { InventoryRow } from "@/lib/queries/admin";
 
 export function InventoryTable({ rows }: { rows: InventoryRow[] }) {
   const { toast } = useToast();
   const [amounts, setAmounts] = React.useState<Record<string, number>>({});
+  const [isPending, startTransition] = React.useTransition();
 
   function adjust(variantId: string, direction: 1 | -1) {
     const amount = Math.abs(amounts[variantId] ?? 1) * direction;
-    React.startTransition(async () => {
+    startTransition(async () => {
       const result = await adjustInventoryAction({
         variant_id: variantId,
         change_amount: amount,
@@ -31,6 +33,7 @@ export function InventoryTable({ rows }: { rows: InventoryRow[] }) {
 
   return (
     <div className="overflow-hidden rounded-md border border-border bg-card">
+      <LoadingOverlay show={isPending} label="Updating inventory" />
       <table className="admin-table">
         <thead>
           <tr>

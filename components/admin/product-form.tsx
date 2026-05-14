@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { useToast } from "@/components/ui/toast";
 import type { Category, ProductWithRelations } from "@/lib/db/types";
 import { ensureSlug } from "@/lib/slug";
@@ -209,6 +210,7 @@ export function ProductForm({ categories, product }: { categories: Category[]; p
 
   return (
     <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="grid min-w-0 gap-7 2xl:grid-cols-[minmax(280px,390px)_minmax(0,1fr)]">
+      <LoadingOverlay show={isPending} label="Saving product" />
       <aside className="admin-card h-fit min-w-0 p-5 sm:p-7 2xl:sticky 2xl:top-[110px]">
         <div className="relative aspect-square overflow-hidden rounded-lg bg-[#eef3f8]">
           <Image

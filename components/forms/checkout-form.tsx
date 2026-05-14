@@ -9,6 +9,7 @@ import { placeOrderAction } from "@/actions/checkout/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoadingOverlay } from "@/components/ui/brand-loader";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/toast";
 import type { CartSnapshot, Profile, SiteSettings } from "@/lib/db/types";
@@ -66,6 +67,7 @@ export function CheckoutForm({
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-10 xl:grid-cols-[1fr_420px]">
+      <LoadingOverlay show={isPending} label="Placing order" />
       <input type="hidden" {...form.register("idempotency_key")} />
 
       <div className="rounded-[30px] border border-black/8 bg-white p-6 shadow-[0_18px_40px_rgba(31,24,18,0.05)] md:p-8">
